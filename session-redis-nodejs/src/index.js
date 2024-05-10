@@ -78,9 +78,12 @@ function checkSessionMiddeleware(req, res, next) {
     }
 }
 
-// Exemple route '/data' qui utilise le middleware 'checkSessionMiddeleware'
+// Exemple endpoint '/data' qui utilise le middleware 'checkSessionMiddeleware'
 app.get('/data', checkSessionMiddeleware, (req, res) => {
-    res.send('Utilisateur authentifié, sessions valide !')
+    // middelware checkSessionMiddeleware passé
+    // Récupération des données...
+    // (apple des méthodes qui permet de récupérer des données sur une autre instance MySQL par exemple)
+    res.send('Sessions utilisateur valide, accès aux données valide')
 })
 
 app.listen(3000, () => {

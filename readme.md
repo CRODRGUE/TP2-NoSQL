@@ -326,7 +326,7 @@ Nous retrouvons ci-dessous les lignes de codes qui permettent la connexion, mais
     // Route pour l'authentification et la génération de la session de l'utilisateur
     app.post("/login", (req, res) => {
         // Récupération des données de la requête
-        const { username, password } = req.body
+        const { username } = req.body
         // Ajout des valeurs en session (username)
         req.session.username = username;
         // Revois d'une réponse avec la session 
@@ -364,6 +364,20 @@ function checkSessionMiddeleware(req, res, next) {
         res.status(403).send('Non authentifié');
     }
 }
+```
+
+####  Exemple endpoint 
+
+Voici un exemple pour une route de l'API qui permet de recuperer des données, uniquement si celui-ci à une session valide.
+
+``` Javascript
+// Exemple endpoint '/data' qui utilise le middleware 'checkSessionMiddeleware'
+app.get('/data', checkSessionMiddeleware, (req, res) => {
+    // middelware checkSessionMiddeleware passé
+    // Récupération des données...
+    // (apple des méthodes qui permet de récupérer des données sur une autre instance MySQL par exemple)
+    res.send('Sessions utilisateur valide, accès aux données valide')
+})
 ```
 
 ## Introspection sur l'Intégration de Redis
